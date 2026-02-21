@@ -1,0 +1,84 @@
+init python:
+    def type_sound(event, interact=True, **kwargs):
+        if not interact:
+            return
+        if event == "begin":
+            for i in range(50):
+                renpy.sound.queue("audio/sound.mp3")
+        elif event == "slow_done":
+            renpy.sound.stop()
+
+define selen = Character('Селена', color="#00FFFF", what_slow_cps=20, callback=type_sound)
+define you = Character('', color="#4169e1", what_slow_cps=20, callback=type_sound)
+
+image bg moon = Movie(
+        play="video/moon.webm",
+        pos=(0.5, 0.5),
+        anchor=(0.5, 0.5),
+        loop=True,
+        channel="movie_atrop"
+    )
+
+image bg end = "images/end.jpg"
+
+label start:
+    scene bg moon at Transform(zoom=2.5) with dissolve
+    play music "audio/night.mp3" loop volume 0.5
+
+    show selen at Transform(pos=(0.27, 0.08)) with dissolve:
+        zoom 1.4
+
+    selen "Тайна, которую я хотела тебе рассказать..."
+    you "..."
+    selen "..."
+    selen "Знаешь почему ты здесь?"
+    you "..."
+
+    $ renpy.music.set_volume(0.9, delay=1.0)
+    show stars at Transform(alpha=0.3, pos=(0.27, 0.08), zoom=1.6) with dissolve
+
+    selen "Одиночество."
+    selen "Ты сам запер себя в этом мире."
+    selen "Ты боялся быть один, ты не мог этого вынести."
+    selen "Ты создал меня, лишь бы скрыться от всего этого."
+    selen "Что ты выберешь..."
+    selen "Принять реальность или дальше скрываться в иллюзии?"
+
+    menu:
+        "Иллюзия":
+            you "Я хочу остаться с тобой."
+            jump bad_ending
+        "Реальность.":
+            you "Мне и правда нужно уйти. Спасибо за все."
+            jump happy_ending
+
+    hide selen
+
+label happy_ending:
+
+    scene bg end:
+
+        fit "cover"
+
+    with dissolve
+
+    you "Ты просыпаешься. Комната озаряет солнечный свет. За окном поют весенние птицы."
+    you "Мир и не так плох."
+    you "Катарсис."
+
+    return
+
+label bad_ending:
+
+    scene bg end:
+
+       fit "cover"
+
+    with dissolve
+
+    you "Ты остаешься с ней. Обнимаешь ее. Вы плачете."
+    you "Вы медленно каменеете, становитесь статуями."
+    you "Ты решил навсегда остаться в этом мире."
+    you "Вечность."
+
+    return
