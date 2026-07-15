@@ -1,35 +1,26 @@
 extends CharacterBody2D
 
-const SPEED = 3500
+const SPEED = 3000
+@onready var anim = $AnimSelene
 
-@onready var anim = $AnimPlayer
 var direction: Vector2 = Vector2(0, 0)
 
 func _physics_process(delta: float) -> void:
-	# Передвижение персонажа
-	direction = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down")).normalized()
-	if is_move():
+	if global_position.distance_to(Global.player_position) > 20:
+		direction = global_position.direction_to(Global.player_position)
 		move(delta)
 	else:
 		idle(delta)
 	move_and_slide()
-	# Сохранение позиции игрока
-	Global.player_position = global_position
-
-func is_move() -> bool:
-	if direction != Vector2(0, 0):
-		return true
-	else: 
-		return false
-
 func move(delta: float):
+	print(direction)
 	anim_move()
 	velocity = SPEED * direction * delta
 
 func anim_move():
-	if direction == Vector2(0, 1):
+	if abs(direction[0]) < 0.5 and direction[1] > 0.5:
 		anim.play("Down")
-	elif direction == Vector2(0, -1):
+	elif abs(direction[0]) < 0.5 and direction[1] < -0.5:
 		anim.play("Up")
 	elif direction[0] < 0:
 		anim.flip_h = true
@@ -38,11 +29,10 @@ func anim_move():
 		anim.flip_h = false
 		anim.play("Sides")
 
-# Это просто стояне на месте
 func idle(delta: float):
 	velocity.x = 0
 	velocity.y = 0
-	anim.play("Idle_down")
+	anim.play("Idle")
 	#if direction == D:
 		#anim.play("Idle_down")
 	#elif direction == U:

@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dn2h7kuillh67" path="res://assets/tiles/romario-tileMap/objects.png" id="9_rysoc"]
 [ext_resource type="Texture2D" uid="uid://cw8jx13sb7opi" path="res://assets/tiles/romario-tileMap/Outdoor_Decor_Free.png" id="10_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://ch87jf7oeb20" path="res://assets/tiles/romario-tileMap/plains.png" id="11_264po"]
+[ext_resource type="PackedScene" uid="uid://babm260p27qgn" path="res://scenes/selene.tscn" id="12_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
 texture = ExtResource("2_yqjtg")
@@ -510,6 +511,7 @@ position = Vector2(2, 0)
 z_index = 1
 y_sort_enabled = true
 position = Vector2(-58, -110)
+collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=607026030]
 position = Vector2(-1, 7)
@@ -550,3 +552,9 @@ polygon = PackedVector2Array(-51, -111, 4, -111, 4, -149, -52, -149)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Collision" unique_id=1132573623]
 polygon = PackedVector2Array(-192, 73, -192, -160, 192, -160, 192, 80, -192, 80, -192, 74, -193, 81, -89, 83, 203, 87, 203, -167, -199, -169, -193, 77, -193, 75)
+
+[node name="Selene" parent="." unique_id=1633753704 instance=ExtResource("12_dinhu")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-79, -102)
+collision_layer = 2

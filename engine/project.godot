@@ -14,6 +14,10 @@ config/name="game_engine"
 run/main_scene="uid://ng2h11vs173u"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+Global="*uid://bnwdxcr17ub55"
+
 [input]
 
 up={
