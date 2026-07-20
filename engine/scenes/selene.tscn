@@ -174,9 +174,12 @@ script = ExtResource("1_j8nh0")
 
 [node name="AnimSelene" type="AnimatedSprite2D" parent="." unique_id=742474725]
 sprite_frames = SubResource("SpriteFrames_6qltx")
-animation = &"Up"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1892828590]
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_j8nh0")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=291222062]
+debug_enabled = true

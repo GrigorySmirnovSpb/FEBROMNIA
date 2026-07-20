@@ -216,6 +216,7 @@ y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"Down"
 autoplay = "Idle_down"
+frame_progress = 0.91598415
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2137786358]
 position = Vector2(0, 6)

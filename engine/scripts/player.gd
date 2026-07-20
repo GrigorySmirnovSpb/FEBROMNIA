@@ -13,8 +13,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		idle(delta)
 	move_and_slide()
-	# Сохранение позиции игрока
-	Global.player_position = global_position
 
 func is_move() -> bool:
 	if direction != Vector2(0, 0):
