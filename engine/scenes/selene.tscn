@@ -169,6 +169,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_j8nh0"]
 radius = 5.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8nh0"]
+size = Vector2(70, 52)
+
 [node name="Selene" type="CharacterBody2D" unique_id=1633753704]
 script = ExtResource("1_j8nh0")
 
@@ -180,3 +183,13 @@ autoplay = "Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1892828590]
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_j8nh0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=231697627]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=473106603]
+shape = SubResource("RectangleShape2D_j8nh0")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
