@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 2500
+const SPEED = 0
 @onready var anim = $AnimSelene
 
 var direction: Vector2 = Vector2(0, 0)
