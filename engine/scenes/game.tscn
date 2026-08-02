@@ -1,9 +1,11 @@
+
 [gd_scene format=3 uid="uid://ng2h11vs173u"]
 
 [ext_resource type="PackedScene" uid="uid://cawe1npwl4wn1" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://nnwfn1dhfujc" path="res://assets/tiles/textures_forest.png" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://crh1wgkb3yhw5" path="res://assets/tiles/waterdop.png" id="3_lbhrr"]
-[ext_resource type="Script" uid="uid://nx6qylgq0j0k" path="res://scenes/tile_map.gd" id="4_u5sy4"]
+[ext_resource type="Script" uid="uid://nx6qylgq0j0k" path="res://scripts/tile_map.gd" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://cj1xwjte4ma28" path="res://scenes/sign_test.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://babm260p27qgn" path="res://scenes/selene.tscn" id="12_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
@@ -410,6 +412,7 @@ texture = ExtResource("3_lbhrr")
 [sub_resource type="TileSet" id="TileSet_lbhrr"]
 uv_clipping = true
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 6
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 sources/1 = SubResource("TileSetAtlasSource_iywne")
 
@@ -519,6 +522,13 @@ occluder_light_mask = 0
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=129863958]
 
 [node name="Selene" parent="." unique_id=1633753704 instance=ExtResource("12_dinhu")]
+light_mask = 2
+visibility_layer = 2
 z_index = 1
 y_sort_enabled = true
 position = Vector2(42, 246)
+collision_layer = 4
+
+[node name="Sign" parent="." unique_id=802742406 instance=ExtResource("6_p57ef")]
+position = Vector2(152, 331)
+

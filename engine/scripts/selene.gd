@@ -1,19 +1,22 @@
 extends CharacterBody2D
 
-const SPEED = 3000
+const SPEED = 0
 @onready var anim = $AnimSelene
 
 var direction: Vector2 = Vector2(0, 0)
+var f_dialogue = false
 
 func _physics_process(delta: float) -> void:
+	if f_dialogue == true && Input.is_action_pressed("action"):
+		Dialogic.start("res://dialogues/test1.dtl")
 	if global_position.distance_to(Global.player_position) > 20:
 		direction = global_position.direction_to(Global.player_position)
 		move(delta)
 	else:
 		idle(delta)
 	move_and_slide()
+
 func move(delta: float):
-	print(direction)
 	anim_move()
 	velocity = SPEED * direction * delta
 
@@ -43,3 +46,12 @@ func idle(delta: float):
 	#else:
 		#anim.flip_h = false
 		#anim.play("Idle_sides")
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	print("Внутри")
+	f_dialogue = true
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	print("Вышел")
+	f_dialogue = false
