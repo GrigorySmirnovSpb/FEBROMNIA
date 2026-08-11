@@ -5,9 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://crh1wgkb3yhw5" path="res://assets/tiles/waterdop.png" id="3_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://dil3qxw8s67tu" path="res://assets/tiles/grasstest.png" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cj1xwjte4ma28" path="res://scenes/sign_test.tscn" id="6_p57ef"]
-[ext_resource type="Shader" uid="uid://d1708v7etdgdk" path="res://scenes/testshader1.tres" id="7_0tnpc"]
+[ext_resource type="Shader" uid="uid://d1708v7etdgdk" path="res://shaders/testshader1.tres" id="7_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://carahl1imco84" path="res://assets/tiles/romario-tileMap/Oak_Tree.png" id="8_vtaks"]
-[ext_resource type="Script" uid="uid://0xvgwvwqpkg" path="res://scenes/shadertest.gd" id="9_kvpfn"]
+[ext_resource type="Script" uid="uid://0xvgwvwqpkg" path="res://scripts/shadertest.gd" id="9_kvpfn"]
+[ext_resource type="Script" uid="uid://ceoyjdxd24quf" path="res://scripts/bridge.gd" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://babm260p27qgn" path="res://scenes/selene.tscn" id="12_dinhu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
@@ -71,6 +72,7 @@ texture = ExtResource("2_lnu2h")
 4:7/0 = 0
 4:8/0 = 0
 4:9/0 = 0
+4:9/0/custom_data_0 = 0.3
 0:10/0 = 0
 0:11/0 = 0
 0:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 4.986992, 8, 8, 4.659977, 8)
@@ -127,6 +129,7 @@ texture = ExtResource("2_lnu2h")
 3:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, -8, 8, -8, -8)
 3:18/0 = 0
 4:10/0 = 0
+4:10/0/custom_data_0 = 0.3
 4:11/0 = 0
 4:12/0 = 0
 4:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, 4.668144, 8, -8, 8)
@@ -422,6 +425,8 @@ texture = ExtResource("5_p57ef")
 uv_clipping = true
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 6
+custom_data_layer_0/name = "speed_multiplier"
+custom_data_layer_0/type = 3
 sources/0 = SubResource("TileSetAtlasSource_lbhrr")
 sources/1 = SubResource("TileSetAtlasSource_iywne")
 sources/2 = SubResource("TileSetAtlasSource_u5sy4")
@@ -450,21 +455,21 @@ shader = ExtResource("7_0tnpc")
 
 [node name="Game" type="Node2D" unique_id=739709231]
 y_sort_enabled = true
-position = Vector2(2, 0)
+position = Vector2(-112, -290)
 
 [node name="Player" parent="." unique_id=154947568 instance=ExtResource("1_uwrxv")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(206, 292)
+position = Vector2(320, 689)
 collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=607026030]
 position = Vector2(-1, 3)
 zoom = Vector2(5, 5)
-limit_left = 0
-limit_top = -223
-limit_right = 1777
-limit_bottom = 958
+limit_left = -115
+limit_top = -510
+limit_right = 1662
+limit_bottom = 671
 position_smoothing_enabled = true
 drag_left_margin = 0.5
 drag_top_margin = 0.4
@@ -480,7 +485,6 @@ position = Vector2(42, 246)
 collision_layer = 4
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1373687529]
-visible = false
 physics_quadrant_size = 1
 
 [node name="map" type="CanvasGroup" parent="TileMapLayer" unique_id=636580893]
@@ -606,6 +610,7 @@ polygon = PackedVector2Array(0, -224, 1776, -224, 1776, 960, 0, 960, 0, -223, -3
 position = Vector2(152, 331)
 
 [node name="grasstest" type="TileMapLayer" parent="." unique_id=1792033275]
+visible = false
 physics_quadrant_size = 1
 
 [node name="map" type="CanvasGroup" parent="grasstest" unique_id=1755230024]
@@ -625,3 +630,37 @@ position = Vector2(138.00002, 279)
 scale = Vector2(1.2578126, 1.2)
 texture = ExtResource("8_vtaks")
 script = ExtResource("9_kvpfn")
+
+[node name="Bridge_1" type="Area2D" parent="." unique_id=231661581]
+position = Vector2(395, 696)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("10_vtaks")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bridge_1" unique_id=777425806]
+polygon = PackedVector2Array(-21, 34, -13, 25, 39, 25, 46, 34, 46, -15, 39, -22, -14, -22, -22, -13)
+
+[node name="Bridge_2" type="Area2D" parent="." unique_id=1385534755]
+position = Vector2(1036, 696)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("10_vtaks")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bridge_2" unique_id=2102738566]
+polygon = PackedVector2Array(-21, 34, -13, 25, 39, 25, 46, 34, 46, -15, 39, -22, -14, -22, -22, -13)
+
+[node name="Bridge_3" type="Area2D" parent="." unique_id=1726409258]
+position = Vector2(1035, 408)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("10_vtaks")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bridge_3" unique_id=991718394]
+polygon = PackedVector2Array(-21, 34, -13, 25, 39, 25, 46, 34, 46, -15, 39, -22, -14, -22, -22, -13)
+
+[connection signal="body_entered" from="Bridge_1" to="Bridge_1" method="_on_body_entered"]
+[connection signal="body_exited" from="Bridge_1" to="Bridge_1" method="_on_body_exited"]
+[connection signal="body_entered" from="Bridge_2" to="Bridge_2" method="_on_body_entered"]
+[connection signal="body_exited" from="Bridge_2" to="Bridge_2" method="_on_body_exited"]
+[connection signal="body_entered" from="Bridge_3" to="Bridge_3" method="_on_body_entered"]
+[connection signal="body_exited" from="Bridge_3" to="Bridge_3" method="_on_body_exited"]
