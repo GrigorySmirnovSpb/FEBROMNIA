@@ -460,7 +460,7 @@ position = Vector2(-112, -290)
 [node name="Player" parent="." unique_id=154947568 instance=ExtResource("1_uwrxv")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(177, 265)
+position = Vector2(112, 265)
 collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=607026030]

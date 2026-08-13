@@ -5,11 +5,12 @@ const speed_mult: float = 1.0
 
 @onready var anim = $AnimPlayer
 @onready var tilemap = $"../TileMapLayer/map/osnova"
-var direction: Vector2 = Vector2(0, 0)
+
+var direction: Vector2 = Vector2.ZERO
+var last_direction: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
-	print("TileMap position: ", tilemap.position)
-	print("TileMap global position: ", tilemap.global_position)
+	pass
 
 func _physics_process(delta: float) -> void:
 	# Передвижение персонажа
@@ -20,7 +21,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		idle(delta)
 	move_and_slide()
-	# Сохранение позиции игрока
+	
+	if last_direction != direction:
+		Global.player_trajectory.append(global_position)
+		if Global.player_trajectory.size() > 100:
+			Global.player_trajectory.pop_front()
+	last_direction = direction
 	Global.player_position = global_position
 
 func get_speed_multiplier() -> float:
@@ -29,12 +35,10 @@ func get_speed_multiplier() -> float:
 	var tile_data = tilemap.get_cell_tile_data(tile_pos)
 	
 	if tile_data:
-		#print("Yes")
-		print(tile_data.get_custom_data("speed_multiplier"))
 		return speed_mult - tile_data.get_custom_data("speed_multiplier")
 	else:
 		return speed_mult
-		
+
 func is_move() -> bool:
 	if direction != Vector2(0, 0):
 		return true
@@ -57,8 +61,7 @@ func anim_move():
 		anim.flip_h = false
 		anim.play("Sides")
 
-# Это просто стояне на месте
-func idle(delta: float):
+func idle(delta: float): # Это просто стояне на месте
 	velocity.x = 0
 	velocity.y = 0
 	anim.play("Idle_down")

@@ -1,9 +1,25 @@
 [gd_scene format=3 uid="uid://cj1xwjte4ma28"]
 
 [ext_resource type="Script" uid="uid://dqhi1gcshqaud" path="res://scripts/sign_test.gd" id="1_s45vm"]
+[ext_resource type="Texture2D" uid="uid://nnwfn1dhfujc" path="res://assets/tiles/textures_forest.png" id="2_6uwmh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_csjkt"]
 size = Vector2(38, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g0p1"]
+atlas = ExtResource("2_6uwmh")
+region = Rect2(96, 320, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hjco"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g0p1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Sign" type="Area2D" unique_id=802742406]
 collision_layer = 0
@@ -24,6 +40,9 @@ scale = Vector2(0.05, 0.05)
 theme_override_font_sizes/font_size = 100
 text = "press \"E\" for information"
 horizontal_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1454385]
+sprite_frames = SubResource("SpriteFrames_0hjco")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
